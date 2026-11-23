@@ -1,0 +1,46 @@
+<div class="hh-product" style="max-width:720px;margin:0 auto;padding:32px 16px;font-size:16px;line-height:1.5;color:#1B1917">
+<style>
+/* P3-08b canonical grade stamp: colour + letter + icon + word (the app quadruple,
+   scripts/build-app.mjs GRADE_CHIP). Fills canonical (docs/design-tokens.md);
+   A/E card-white letters, B/C/D ink letters (WCAG AA small text, p3-03 decision).
+   Stamp shape (2px ink border, 10px radius, inline-flex) comes from the shell
+   .hh-grade component layer (styles:main, live since P3-08). Scoped under
+   .hh-product — no global selectors. Static CSS: no runtime hydration needed. */
+.hh-product .hh-grade{background:var(--hh-paper2,#EFE7D6);color:#57534E}
+.hh-product .hh-grade[data-grade="A"]{background:#15803D;color:#FFFDF8}
+.hh-product .hh-grade[data-grade="B"]{background:#65A30D;color:#1B1917}
+.hh-product .hh-grade[data-grade="C"]{background:#CA8A04;color:#1B1917}
+.hh-product .hh-grade[data-grade="D"]{background:#EA580C;color:#1B1917}
+.hh-product .hh-grade[data-grade="E"]{background:#DC2626;color:#FFFDF8}
+.hh-product .hh-grade .hh-g-word{display:none}
+.hh-product .hh-grade[data-grade="A"] .hh-g-word[data-for="A"]{display:inline}
+.hh-product .hh-grade[data-grade="B"] .hh-g-word[data-for="B"]{display:inline}
+.hh-product .hh-grade[data-grade="C"] .hh-g-word[data-for="C"]{display:inline}
+.hh-product .hh-grade[data-grade="D"] .hh-g-word[data-for="D"]{display:inline}
+.hh-product .hh-grade[data-grade="E"] .hh-g-word[data-for="E"]{display:inline}
+.hh-product .hh-grade-unknown{color:#57534E}
+/* Safety-strip tags sit on CARD white, not the paper page (P3-08b review MINOR-1):
+   tone text #15803D / #B45309 on paper #F6F0E4 is 4.42/4.43:1 (below AA 4.5);
+   on card #FFFDF8 the same tones are 4.93/4.94:1 PASS. Meaning stays in the words. */
+.hh-product .hh-safety .hh-tag{background:#FFFDF8}
+.hh-product .hh-safety .hh-tag[data-halal^="Certified"]{border-color:#15803D;color:#15803D}
+.hh-product .hh-safety .hh-tag[data-halal="Unknown"]{border-color:var(--hh-amber,#B45309);color:var(--hh-amber,#B45309)}
+</style>
+<h1 style="font-size:28px;line-height:1.2;margin:0 0 8px">{{name}}</h1>
+<p style="margin:0 0 16px;color:#57534E">{{brand}} · {{store}} · {{packSize}} · EAN {{ean}}</p>
+<p style="margin:0 0 16px">{{#if grade}}<span class="hh-grade" data-grade="{{grade}}">Hawk Grade {{grade}}<span class="hh-g-word" data-for="A">✓ Great choice</span><span class="hh-g-word" data-for="B">✓ Good choice</span><span class="hh-g-word" data-for="C">◑ Okay sometimes</span><span class="hh-g-word" data-for="D">▲ Limit this one</span><span class="hh-g-word" data-for="E">▲ Occasional treat</span></span>{{else}}<span class="hh-grade hh-grade-unknown" data-grade="">– ? Not yet rated</span>{{/if}}</p>
+<p class="hh-safety" style="margin:0 0 16px;display:flex;flex-wrap:wrap;gap:8px"><span class="hh-tag" data-halal="{{halal}}">Halal: {{halal}}</span><span class="hh-tag">Allergens: check the ingredients label</span></p>
+<div style="background:#FFFDF8;border:2px solid #1B1917;border-radius:12px;padding:24px;margin:0 0 24px">
+<p style="margin:0 0 8px;font-size:22px;font-weight:700">S${{price}} <span style="font-size:16px;font-weight:400;color:#57534E">· S${{pricePer100g}} per 100 g</span></p>
+<p style="margin:0;color:#57534E">Price checked {{priceCheckedAt}} · <a href="{{sourceUrl}}" target="_blank" rel="noopener" style="color:#0F766E">retailer source ↗</a></p>
+</div>
+<p style="margin:0 0 24px;color:#57534E">Grade {{gradeAttribution}}. Within-category comparison (range {{range}}), not medical advice.</p>
+<details id="ingredients" style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;margin:0 0 16px"><summary style="cursor:pointer;padding:16px 24px;font-weight:600">Ingredients (label-declared)</summary><div style="padding:0 24px 24px">{{ingredients}}</div></details>
+<details style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;margin:0 0 16px"><summary style="cursor:pointer;padding:16px 24px;font-weight:600">Nutrition</summary><div style="padding:0 24px 24px">{{nutrition}}</div></details>
+<details style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;margin:0 0 16px"><summary style="cursor:pointer;padding:16px 24px;font-weight:600">Provenance &amp; Halal</summary><div style="padding:0 24px 24px"><p style="margin:0 0 16px">{{provenance}}</p><p style="margin:0">Halal: {{halal}}</p></div></details>
+{{#if ingredientDecode}}<details style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;margin:0 0 16px"><summary style="cursor:pointer;padding:16px 24px;font-weight:600">Ingredient decode — additive evidence (sourced verdicts)</summary><div style="padding:0 24px 24px;white-space:pre-line">{{ingredientDecode}}</div></details>{{/if}}
+{{#if claimChecks}}<details style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;margin:0 0 16px"><summary style="cursor:pointer;padding:16px 24px;font-weight:600">Claim checks — approved flags with evidence</summary><div style="padding:0 24px 24px;white-space:pre-line">{{claimChecks}}</div></details>{{/if}}
+{{#if panelNotes}}<details style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;margin:0 0 16px"><summary style="cursor:pointer;padding:16px 24px;font-weight:600">Panel notes — source disagreements, honestly surfaced</summary><div style="padding:0 24px 24px;white-space:pre-line">{{panelNotes}}</div></details>{{/if}}
+<p style="margin:0 0 24px"><a href="/compare#/product/{{ean}}" style="display:inline-block;background:#0F766E;color:#F6F0E4;text-decoration:none;font-weight:600;padding:16px 32px;border-radius:8px">Compare this product →</a></p>
+<p style="margin:0;color:#57534E">{{disclaimer}}</p>
+</div>

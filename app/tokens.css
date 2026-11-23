@@ -1,0 +1,60 @@
+/* Canonical source: docs/design-tokens.md ("The Honest Label"). Do not fork these values. */
+:root {
+  --paper: #F6F0E4;
+  --paper2: #EFE7D6;
+  --card: #FFFDF8;
+  --ink: #1B1917;
+  --ink-soft: #57534E;
+  --line: #D8CFBC;
+  --teal: #0F766E;
+  --teal-deep: #0B5D57;
+  --teal-tint: #E3EEEC;
+  --ga: #15803D;
+  --gb: #65A30D;
+  --gc: #CA8A04;
+  --gd: #EA580C;
+  --ge: #DC2626;
+  --flag: #B91C1C;
+  --flag-bg: #FBEAE9;
+  --amber: #B45309;
+  --amber-bg: #FBF3E4;
+  --grey: #6B7280;
+  --hero-gold: #F6D55C;
+  --hero-sub: #EAF3F1;
+  --hero-stats: #D7E5E2;
+  --footer-text: #C9C2B4;
+
+  --display: "Fraunces", Georgia, serif;
+  --body: "Atkinson Hyperlegible", Verdana, sans-serif;
+  --font-size-base: 16px;
+  --line-height-body: 1.6;
+
+  --rule-thin: 2px;
+  --rule-thick: 3px;
+  --rule-hairline: 1px;
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --grid: 8px;
+  --container: 1080px;
+  --container-pad: 24px;
+  --header-height: 72px;
+  --touch-min: 44px;
+
+  --motion-reveal: 500ms;
+  --motion-stagger: 60ms;
+  --motion-reorder: 200ms;
+  --motion-hover: 180ms;
+  --motion-ease: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-reveal: 0ms;
+    --motion-stagger: 0ms;
+    --motion-reorder: 0ms;
+    --motion-hover: 0ms;
+  }
+}

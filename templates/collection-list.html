@@ -1,0 +1,58 @@
+<x-block block-type="rawHtml" container-width="full">
+<div class="hh-products" style="max-width:720px;margin:0 auto;padding:32px 16px;font-size:16px;line-height:1.5;color:#1B1917">
+<style>
+/* P3-08b canonical grade stamp: colour + letter + icon + word (the app quadruple,
+   scripts/build-app.mjs GRADE_CHIP). Fills canonical (docs/design-tokens.md);
+   A/E card-white letters, B/C/D ink letters (WCAG AA small text, p3-03 decision).
+   Stamp shape (2px ink border, 10px radius, inline-flex) comes from the shell
+   .hh-grade component layer (styles:main, live since P3-08). Scoped under
+   .hh-products — no global selectors. Static CSS: no runtime hydration needed. */
+.hh-products .hh-grade{background:var(--hh-paper2,#EFE7D6);color:#57534E}
+.hh-products .hh-grade[data-grade="A"]{background:#15803D;color:#FFFDF8}
+.hh-products .hh-grade[data-grade="B"]{background:#65A30D;color:#1B1917}
+.hh-products .hh-grade[data-grade="C"]{background:#CA8A04;color:#1B1917}
+.hh-products .hh-grade[data-grade="D"]{background:#EA580C;color:#1B1917}
+.hh-products .hh-grade[data-grade="E"]{background:#DC2626;color:#FFFDF8}
+.hh-products .hh-grade .hh-g-word{display:none}
+.hh-products .hh-grade[data-grade="A"] .hh-g-word[data-for="A"]{display:inline}
+.hh-products .hh-grade[data-grade="B"] .hh-g-word[data-for="B"]{display:inline}
+.hh-products .hh-grade[data-grade="C"] .hh-g-word[data-for="C"]{display:inline}
+.hh-products .hh-grade[data-grade="D"] .hh-g-word[data-for="D"]{display:inline}
+.hh-products .hh-grade[data-grade="E"] .hh-g-word[data-for="E"]{display:inline}
+.hh-products .hh-grade-unknown{color:#57534E}
+</style>
+<h1 style="font-size:28px;line-height:1.2;margin:0 0 8px">{{listTitle}}</h1>
+<p style="margin:0 0 24px;color:#57534E">Singapore grocery products checked so far. The catalogue is small and growing — every figure shows its source and the date it was checked.</p>
+<nav class="hh-departments hh-filter-bar" aria-label="Departments" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 24px">
+<span style="font-weight:600;color:#57534E">Aisles:</span>
+<a href="/products" data-aisle="all" style="display:inline-block;padding:12px 16px;border-radius:9999px;border:2px solid #1B1917;background:#FFFDF8;color:#1B1917;text-decoration:none;font-weight:600">All products</a>
+{{#each categories}}<a href="{{url}}" data-aisle="{{name}}" style="display:inline-block;padding:12px 16px;border-radius:9999px;border:2px solid #1B1917;background:#FFFDF8;color:#1B1917;text-decoration:none;font-weight:600">{{name}}</a>{{/each}}
+</nav>
+{{#unless items}}<div style="border:2px solid #1B1917;border-radius:12px;background:#FFFDF8;padding:24px;color:#57534E">No products checked yet. The catalogue starts small and grows openly.</div>{{/unless}}
+<div style="display:grid;gap:16px">
+{{#each items}}
+<a href="{{url}}" data-department="{{department}}" style="display:block;background:#FFFDF8;border:2px solid #1B1917;border-radius:12px;padding:24px;text-decoration:none;color:#1B1917">
+<p style="margin:0 0 8px;font-size:18px;font-weight:600;color:#0F766E">{{title}}</p>
+<p style="margin:0 0 8px;color:#57534E">{{store}} · {{packSize}} · EAN {{ean}}</p>
+<p style="margin:0 0 8px">{{#if grade}}<span class="hh-grade" data-grade="{{grade}}">Hawk Grade {{grade}}<span class="hh-g-word" data-for="A">✓ Great choice</span><span class="hh-g-word" data-for="B">✓ Good choice</span><span class="hh-g-word" data-for="C">◑ Okay sometimes</span><span class="hh-g-word" data-for="D">▲ Limit this one</span><span class="hh-g-word" data-for="E">▲ Occasional treat</span></span>{{else}}<span class="hh-grade hh-grade-unknown" data-grade="">– ? Not yet rated</span>{{/if}}</p>
+<p style="margin:0 0 8px;font-size:20px;font-weight:700">S${{price}} <span style="font-size:16px;font-weight:400;color:#57534E">· S${{pricePer100g}} per 100g</span></p>
+<p style="margin:0;color:#57534E">Price checked {{priceCheckedAt}}</p>
+</a>
+{{/each}}
+</div>
+<nav aria-label="Pagination" style="margin:24px 0 0;display:flex;gap:8px">
+{{#if pagination.hasPrev}}<a href="{{pagination.prevUrl}}" rel="prev" style="color:#0F766E">← Previous</a>{{/if}}
+{{#each pagination.pages}}{{#if active}}<span aria-current="page" style="font-weight:600">{{number}}</span>{{/if}}{{#unless active}}<a href="{{url}}" style="color:#0F766E">{{number}}</a>{{/unless}}{{/each}}
+{{#if pagination.hasNext}}<a href="{{pagination.nextUrl}}" rel="next" style="color:#0F766E">Next →</a>{{/if}}
+</nav>
+<p style="margin:24px 0 0;color:#57534E">Hawk Grades compare products within the same category only. Not medical or dietary advice. Prices and labels change — always check the pack in store.</p>
+<!-- P3-08b fixes (review BLOCKER-1): the platform renders rawHtml verbatim and defers
+     scripts as siblings of .hh-products inside div.w-full (served-DOM proof:
+     runs/p3-08b/before/live-products-list.html). The resolver is placement-independent:
+     currentScript.closest (script inside) → parentNode.querySelector (served sibling
+     placement) → document.querySelector (any placement / currentScript unavailable).
+     The script also sits INSIDE .hh-products in this source. Regression-tested at the
+     real served sibling placement (tests/p3-08b-collection-templates.test.mjs). -->
+<script>(function(){var cs=document.currentScript;var root=(cs&&(cs.closest('.hh-products')||(cs.parentNode&&cs.parentNode.querySelector('.hh-products'))))||document.querySelector('.hh-products');if(!root)return;var nav=root.querySelector('.hh-departments');if(!nav)return;var PILL='display:inline-block;padding:12px 16px;border-radius:9999px;border:2px solid #1B1917;background:#FFFDF8;color:#1B1917;text-decoration:none;font-weight:600';var links=[].slice.call(nav.querySelectorAll('a[data-aisle]'));var seen={};var aisleLinks=[];links.forEach(function(a){var aisle=a.getAttribute('data-aisle')||'';var href=a.getAttribute('href')||'';var text=(a.textContent||'').trim();var keep=aisle==='all'||(href&&text&&href.indexOf('/products/category/')===0&&!seen[aisle]);if(keep){if(aisle!=='all'){seen[aisle]=1;aisleLinks.push(a);}}else if(a.parentNode){a.parentNode.removeChild(a);}});if(aisleLinks.length===0){var depts=[];var dseen={};[].forEach.call(root.querySelectorAll('[data-department]'),function(el){var d=(el.getAttribute('data-department')||'').trim();if(d&&!dseen[d]){dseen[d]=1;depts.push(d);}});depts.forEach(function(d){var a=document.createElement('a');a.setAttribute('href','/products/category/'+encodeURIComponent(d.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')));a.setAttribute('data-aisle',d);a.style.cssText=PILL;a.textContent=d;nav.appendChild(a);});}var path=location.pathname.replace(/\/+$/,'')||'/';[].forEach.call(nav.querySelectorAll('a[data-aisle]'),function(a){var href=(a.getAttribute('href')||'').replace(/\/+$/,'');var cur=href==='/products'?(path==='/products'||path.indexOf('/products/page/')===0):(path===href||path.indexOf(href+'/page/')===0);if(cur){a.setAttribute('aria-current','page');a.style.background='#1B1917';a.style.color='#F6F0E4';}});})();</script>
+</div>
+</x-block>

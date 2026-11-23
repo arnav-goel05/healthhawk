@@ -1,0 +1,7 @@
+{
+  "name": "hosted-cockpit-page",
+  "private": true,
+  "type": "module",
+  "description": "HealthHawk hosted cockpit — dynamic QW Page, Node 22 built-ins only, zero dependencies",
+  "main": "server.mjs"
+}

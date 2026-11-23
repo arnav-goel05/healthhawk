@@ -1,0 +1,184 @@
+<style>
+#hh-home .hh-searchrow{display:flex;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-3)}
+#hh-home .hh-searchrow .input{flex:1 1 260px;min-height:48px;background:hsl(var(--card));border:var(--border-width) solid hsl(var(--foreground));border-radius:var(--radius-md);color:hsl(var(--foreground));padding:12px 16px;font:inherit}
+#hh-home .hh-searchrow .btn{min-height:48px}
+#hh-home .hh-pills{display:flex;flex-wrap:wrap;gap:var(--space-1);align-items:center;margin-top:var(--space-3)}
+#hh-home .hh-pills .lbl{font-size:var(--eyebrow-size);font-weight:var(--weight-bold);letter-spacing:var(--eyebrow-tracking);text-transform:uppercase;color:hsl(var(--primary-foreground)/0.85);margin-right:var(--space-1)}
+#hh-home .hh-pill{display:inline-flex;align-items:center;min-height:44px;padding:8px 20px;border-radius:var(--radius-pill);border:var(--border-width) solid hsl(var(--primary-foreground));color:hsl(var(--primary-foreground));text-decoration:none;font-weight:var(--weight-bold);font-size:var(--text-sm)}
+#hh-home .hh-pill:hover{background:hsl(var(--primary-foreground));color:var(--hh-teal-deep);text-decoration:none}
+#hh-home .hh-trustline{margin-top:var(--space-3);font-size:var(--text-sm);color:hsl(var(--primary-foreground)/0.85)}
+#hh-home section:not(.hero){padding-block:var(--section-y-sm)}
+#hh-home .hh-sechead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--space-2);margin-bottom:var(--space-3)}
+#hh-home .hh-sechead h2{margin:0}
+#hh-home .hh-sechead .meta{font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+#hh-home .hh-watch{padding:var(--space-3)}
+#hh-home .hh-watchlist{list-style:none;margin:var(--space-2) 0 0;padding:0;display:grid;gap:var(--space-3)}
+#hh-home .hh-watchitem{display:grid;grid-template-columns:60px 1fr;gap:var(--space-2);align-items:start;padding-left:var(--space-2);border-left:var(--border-width) solid var(--hh-line)}
+#hh-home .hh-watchthumb{width:60px;height:60px;object-fit:contain;border:1px solid var(--hh-line);border-radius:8px;background:hsl(var(--card))}
+#hh-home .hh-watchicon{display:flex;align-items:center;justify-content:center;font-size:var(--text-lg);color:hsl(var(--muted-foreground))}
+#hh-home .hh-watchline{margin:var(--space-1) 0 0}
+#hh-home .hh-seeproof{display:inline-flex;align-items:center;min-height:44px;font-weight:var(--weight-bold)}
+#hh-home .hh-watchnote{margin-top:var(--space-2);font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+#hh-home .hh-steps{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+#hh-home .hh-stepnum{font-family:var(--font-heading);font-size:var(--text-h2);color:hsl(var(--link))}
+#hh-home .hh-steps h3{margin:var(--space-1) 0}
+#hh-home .hh-picks{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+#hh-home .hh-pick{display:flex;flex-direction:column;gap:var(--space-2)}
+#hh-home .hh-pick .hh-packshot{max-width:160px}
+#hh-home .hh-flag-unverified{color:var(--hh-grey);background:hsl(var(--card));border:var(--border-width) dashed var(--hh-grey)}
+#hh-home .hh-claim summary{display:flex;align-items:center;gap:var(--space-1);min-height:44px;cursor:pointer}
+#hh-home .hh-claim summary::after{content:"▾";margin-left:auto}
+#hh-home .hh-claim[open] summary::after{content:"▴"}
+#hh-home .hh-claimproof{margin:var(--space-1) 0 0;font-size:var(--text-sm);color:hsl(var(--muted-foreground));display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#hh-home .hh-howweknow{margin:0;font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+#hh-home .hh-packicon{font-size:var(--text-h1);color:hsl(var(--muted-foreground))}
+#hh-home .hh-pickname{font-size:var(--text-lg);font-weight:var(--weight-bold);margin:0}
+#hh-home .hh-pickname a{color:hsl(var(--foreground));text-decoration:none}
+#hh-home .hh-pickname a:hover{color:hsl(var(--link))}
+#hh-home .hh-evidence{display:inline-flex;align-items:center;min-height:44px;font-weight:var(--weight-bold)}
+#hh-home .hh-request{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-3)}
+#hh-home .hh-request h2{margin:0;font-size:var(--text-h3)}
+#hh-home .hh-browse{margin-top:var(--space-3)}
+#hh-home .hh-browse a{display:inline-flex;align-items:center;min-height:44px;font-weight:var(--weight-bold)}
+#hh-home .hh-disclaimer{margin:0;font-size:var(--text-sm);line-height:1.5;color:hsl(var(--muted-foreground))}
+</style>
+<div id="hh-home">
+<section class="hero" aria-label="Search the grocery aisle">
+<div class="container">
+<h1 class="hero-title">The box says healthy. <em>We checked.</em></h1>
+<p class="hero-lede">Real grades, real prices, and the claims that don't add up.</p>
+<form class="hh-searchrow" action="/compare" method="get" role="search">
+<input class="input" type="search" name="q" placeholder="Search — name, brand, bijirin, 燕麦…" aria-label="Search products">
+<button class="btn btn-primary" type="submit">Compare</button>
+</form>
+<div class="hh-pills" role="group" aria-label="Intent presets">
+<span class="lbl">I want</span>
+<a class="hh-pill" href="/compare?preset=best-value">Best value</a>
+<a class="hh-pill" href="/compare?preset=balanced">Balanced</a>
+<a class="hh-pill" href="/compare?preset=healthiest">Healthiest</a>
+</div>
+<div class="hh-pills" role="group" aria-label="Categories">
+<a class="hh-pill" href="/compare?chip=kids">Kids</a>
+<a class="hh-pill" href="/compare?chip=all">All</a>
+<a class="hh-pill" href="/compare?chip=oats">Oats</a>
+<a class="hh-pill" href="/compare?chip=granola-muesli">Granola &amp; muesli</a>
+<a class="hh-pill" href="/compare?chip=instant-flavoured">Instant &amp; flavoured</a>
+<a class="hh-pill" href="/compare?chip=plain-flakes">Plain flakes</a>
+</div>
+<p class="hh-trustline">Prices from FairPrice · checked 20 Nov 2026</p>
+</div>
+</section>
+
+<section aria-label="Label watch">
+<div class="container">
+<div class="hh-sechead"><h2>This week’s label watch</h2><span class="meta">Claims checked against the pack</span></div>
+<div class="hh-watch hh-reveal">
+<span class="hh-flag">⚑ Label watch</span>
+<ul class="hh-watchlist">
+<li class="hh-watchitem">
+<img class="hh-watchthumb" src="https://healthhawk.geo.hashmeta.tech/api/media/file/healthhawk-4800361028165-f1cNR9FKTa2dFXBUbpEItkDyyfXnbI.jpg" alt="Nestle Nestle Cereal - Honey Stars pack" width="60" height="60" loading="lazy" decoding="async">
+<div class="hh-watchbody">
+<b>Nestle Cereal - Honey Stars</b>
+<p class="hh-watchline">Says “whole grain” — but that doesn&#39;t match the label.</p>
+<a class="hh-seeproof" href="/compare#/product/4800361028165">See proof →</a>
+</div>
+</li>
+<li class="hh-watchitem">
+<span class="hh-watchthumb hh-watchicon" aria-hidden="true">▣</span>
+<div class="hh-watchbody">
+<b>FairPrice Cereal Drink - Original</b>
+<p class="hh-watchline">Says “low fat” — but that doesn&#39;t match the label.</p>
+<a class="hh-seeproof" href="/compare#/product/8888030315026">See proof →</a>
+</div>
+</li>
+<li class="hh-watchitem">
+<img class="hh-watchthumb" src="https://healthhawk.geo.hashmeta.tech/api/media/file/healthhawk-9556174802601-Xg2eYNQ291HU6GPjWsfMwj4Qit3GDN.jpg" alt="Quaker Quaker Oats Oatmeal - Instant pack" width="60" height="60" loading="lazy" decoding="async">
+<div class="hh-watchbody">
+<b>Quaker Oats Oatmeal - Instant</b>
+<p class="hh-watchline">Says “lower cholesterol” — but that doesn&#39;t match the label.</p>
+<a class="hh-seeproof" href="/compare#/product/9556174802601">See proof →</a>
+</div>
+</li>
+</ul>
+<p class="hh-watchnote">Pack photos: Open Food Facts community, CC BY-SA 3.0 · packaging may differ.</p>
+</div>
+</div>
+</section>
+
+<section class="section-muted" aria-label="How it works">
+<div class="container">
+<div class="hh-sechead"><h2>How HealthHawk works</h2><span class="meta"><a href="/methodology">Full methodology →</a></span></div>
+<div class="hh-steps">
+<div class="hh-card hh-reveal"><span class="hh-stepnum">1</span><h3>Read the label</h3><p class="text-muted">We record the nutrition panel and ingredient list, with the source and date for every number.</p><a class="hh-evidence" href="/methodology#labels">How we read labels →</a></div>
+<div class="hh-card hh-reveal"><span class="hh-stepnum">2</span><h3>Grade it</h3><p class="text-muted">A transparent Hawk Grade (A–E), derived using the Nutri-Score 2023 algorithm, beside the S$ price per 100g.</p><a class="hh-evidence" href="/methodology#grade">How the grade works →</a></div>
+<div class="hh-card hh-reveal"><span class="hh-stepnum">3</span><h3>Check the claims</h3><p class="text-muted">Marketing claims are checked against what the pack actually says. Every flag is one tap from its evidence.</p><a class="hh-evidence" href="/methodology#claims">How claims are checked →</a></div>
+</div>
+</div>
+</section>
+
+<section aria-label="Featured picks">
+<div class="container">
+<div class="hh-sechead"><h2>Featured picks</h2><span class="meta">Prices checked 20 Nov 2026</span></div>
+<div class="hh-picks">
+<article class="hh-card hh-pick hh-reveal">
+<span class="eyebrow">Healthiest pick</span>
+<div class="hh-packshot"><img src="https://healthhawk.geo.hashmeta.tech/api/media/file/healthhawk-8888030058541-wX8TsbjuElrRn2l9RRu3ZzegstrP7P.jpg" alt="Fairprice FairPrice Rolled Oats pack" width="120" height="120" loading="lazy" decoding="async"></div>
+<span class="hh-grade hh-grade-a" role="img" aria-label="Hawk Grade A: Great choice"><span class="hh-grade-letter">A</span> <span aria-hidden="true">✓</span> Great choice</span>
+<h3 class="hh-pickname"><a href="/compare#/product/8888030058541">FairPrice Rolled Oats</a></h3>
+<p class="hh-verdict">Great choice for everyday breakfast.</p>
+
+<div><span class="hh-price">S$4.80</span><span class="hh-unit">S$0.48 / 100g</span></div>
+<div class="cluster"><span class="hh-tag hh-tag-warn">▲ Contains: gluten</span><span class="hh-tag">○ Halal: unknown</span></div>
+<span class="hh-source">FairPrice · checked 20 Nov 2026</span>
+<p class="hh-howweknow"><b>How we know:</b> This is one of the best picks in its group. It is low in sugar, salt and bad fat. A good choice for most days.</p>
+<a class="hh-evidence" href="/compare#/product/8888030058541">See the evidence →</a>
+<span class="hh-source">Photo: uploader kiliweb via Open Food Facts (CC-BY-SA-3.0) — fr-language market front (packaging may differ from local stock) Product photos from the Open Food Facts community; packaging may differ from local stock.</span>
+</article>
+<article class="hh-card hh-pick hh-reveal">
+<span class="eyebrow">Best value</span>
+<div class="hh-packshot"><img src="https://healthhawk.geo.hashmeta.tech/api/media/file/healthhawk-8888030021958-yu31KOUf0hNCSARmGgcwLQh7lI4jfV.jpg" alt="Harvest Fields Harvest Fields Rolled Oats - Whole Grain pack" width="120" height="120" loading="lazy" decoding="async"></div>
+<span class="hh-grade hh-grade-a" role="img" aria-label="Hawk Grade A: Great choice"><span class="hh-grade-letter">A</span> <span aria-hidden="true">✓</span> Great choice</span>
+<h3 class="hh-pickname"><a href="/compare#/product/8888030021958">Harvest Fields Rolled Oats - Whole Grain</a></h3>
+<p class="hh-verdict">Great choice for everyday breakfast.</p>
+<details class="hh-claim"><summary class="hh-flag hh-flag-unverified" aria-label="Claim check: 1 flag — we couldn&#39;t check this (unverified — not a false-claim finding)">? 1 claim we couldn&#39;t check</summary><p class="hh-claimproof">“age-old method” — No one checks this word, so we can not say if it is true.</p></details>
+<div><span class="hh-price">S$5.20</span><span class="hh-unit">S$0.52 / 100g</span></div>
+<div class="cluster"><span class="hh-tag hh-tag-warn">▲ Contains: gluten</span><span class="hh-tag">○ Halal: unknown</span></div>
+<span class="hh-source">FairPrice · checked 20 Nov 2026</span>
+<p class="hh-howweknow"><b>How we know:</b> This is one of the best picks in its group. It is low in sugar, salt and bad fat. A good choice for most days.</p>
+<a class="hh-evidence" href="/compare#/product/8888030021958">See the evidence →</a>
+<span class="hh-source">Photo: uploader ibwocoruytrc via Open Food Facts (CC-BY-SA-3.0) Product photos from the Open Food Facts community; packaging may differ from local stock.</span>
+</article>
+<article class="hh-card hh-pick hh-reveal">
+<span class="eyebrow">Biggest catch</span>
+<div class="hh-packshot"><img src="https://healthhawk.geo.hashmeta.tech/api/media/file/healthhawk-4800361028165-f1cNR9FKTa2dFXBUbpEItkDyyfXnbI.jpg" alt="Nestle Nestle Cereal - Honey Stars pack" width="120" height="120" loading="lazy" decoding="async"></div>
+<span class="hh-grade hh-grade-c" role="img" aria-label="Hawk Grade C: Okay sometimes"><span class="hh-grade-letter">C</span> <span aria-hidden="true">◑</span> Okay sometimes</span>
+<h3 class="hh-pickname"><a href="/compare#/product/4800361028165">Nestle Cereal - Honey Stars</a></h3>
+<p class="hh-verdict">Okay sometimes — not an everyday pick.</p>
+<details class="hh-claim"><summary class="hh-flag" aria-label="Claim check: 2 flags — doesn&#39;t match the label">⚠ 2 claims that don&#39;t match the label</summary><p class="hh-claimproof">“Whole Grain Main Ingredient” — The label and the pack do not match on this claim.</p></details>
+<div><span class="hh-price">S$6.46</span><span class="hh-unit">S$2.15 / 100g</span></div>
+<div class="cluster"><span class="hh-tag hh-tag-warn">▲ Contains: gluten</span><span class="hh-tag hh-tag-safe">✓ Halal certified</span></div>
+<span class="hh-source">FairPrice · checked 20 Nov 2026</span>
+<p class="hh-howweknow"><b>How we know:</b> This one is okay now and then. It has more sugar or fat than the top picks. Save it for some days, not every day.</p>
+<a class="hh-evidence" href="/compare#/product/4800361028165">See the evidence →</a>
+<span class="hh-source">Photo: uploader kiliweb via Open Food Facts (CC-BY-SA-3.0) Product photos from the Open Food Facts community; packaging may differ from local stock.</span>
+</article>
+</div>
+<p class="hh-browse"><a href="/products">Browse all products →</a></p>
+</div>
+</section>
+
+<section aria-label="Request a product">
+<div class="container">
+<div class="hh-card hh-request hh-reveal">
+<div><h2>Can’t find your product?</h2><p class="text-muted">Request any product — no extra fields. Your requests rank which aisle we open next.</p></div>
+<a class="btn btn-primary" href="/request">Request a product</a>
+</div>
+</div>
+</section>
+
+<section aria-label="The small print">
+<div class="container">
+<p class="hh-disclaimer">Hawk Grades compare products within the same category only. They are not medical or dietary advice. Grades are derived using the Nutri-Score 2023 algorithm (Santé publique France) — not an official Nutri-Score mark. Prices and labels change — always check the pack in store. HealthHawk is independent and not affiliated with the retailers or brands listed. Pack photos: Open Food Facts community, CC BY-SA 3.0, self-hosted with attribution; packaging may differ.</p>
+</div>
+</section>
+</div>
