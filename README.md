@@ -4,6 +4,15 @@ HealthHawk helps Singapore grocery shoppers compare breakfast products by nutrit
 
 **[Open the HealthHawk site](https://healthhawk.geo.hashmeta.tech/)** · **[Compare products](https://healthhawk.geo.hashmeta.tech/compare)** · **[Read the methodology](https://healthhawk.geo.hashmeta.tech/methodology)**
 
+## Find the code shown in the demo
+
+| Demo feature | Where to look |
+| --- | --- |
+| **Cron jobs · QwenWork Scheduled** | The daily jobs use the [FairPrice fetcher](scripts/12-fetch-prices.mjs), [publish sync](scripts/12-sync.mjs), [blog knowledge builder](scripts/p3-blog-knowledge.mjs), and [founder digest builder](scripts/p2-digest.mjs). For weekly outputs, see the [basket calculation](scripts/12-basket.mjs), [market scout brief](scripts/p2-scout-brief.mjs), and [weekly rollup in `deriveWeekly`](scripts/founder-queue.mjs). The eight schedule registrations, Open Food Facts re-enrichment runner, and weekly blog-drafting instructions live in the operator setup. |
+| **13 custom HealthHawk skills** | Start with [`ROLE_SCOPES`](scripts/p2-skill-scope.mjs) for all 13 roles and their allowed write paths. Follow the [classifier](scripts/4-classify.mjs), [scoring rules](scripts/score.mjs), and [claim checks](scripts/7a-claim-rules.mjs) for examples of the work they perform. In the operator repository, `skills-manifest.json` indexes the versioned instructions at `skills/healthhawk-<role>/SKILL.md`. Those instruction files are outside this public snapshot. |
+| **Founder dashboard · QwenWork Pages** | The [dashboard renderer](hosted-cockpit-page/render.mjs) builds the page shown in the demo. The [server](hosted-cockpit-page/server.mjs) serves it, and the [snapshot sanitizer](scripts/hosted-cockpit/sanitize.mjs) selects which operating data can appear there. [Open the hosted founder dashboard](https://ne8hlevd.qwenwork.page/). |
+| **Shopper website · Hashmeta AI** | Start with the [homepage HTML](runs/p3-06/homepage-block.html). The [compare app](app/index.html) shows rankings and ingredient evidence. The [methodology HTML](runs/p4-04/methodology-new.html) explains grading, and the [collection templates](templates/) define the product list and detail pages. [Open the shopper website](https://healthhawk.geo.hashmeta.tech/). |
+
 ## What shoppers can do
 
 - Search and compare products within a comparable range, such as plain oats or granola. Switch among **Best value**, **Balanced**, and **Healthiest**. The Best value preset excludes D and E grades by default.
