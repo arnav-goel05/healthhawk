@@ -6,12 +6,41 @@ HealthHawk helps Singapore grocery shoppers compare breakfast products by nutrit
 
 ## Find the code shown in the demo
 
-| Demo feature | Where to look |
+Paths start at the root of this GitHub repository. Click a path to open the file, or press **t** on the repository page and paste the path into GitHub’s file finder.
+
+| Demo feature | What to open | Path from repository root |
+| --- | --- | --- |
+| Daily cron jobs | Price refresh | [`scripts/12-fetch-prices.mjs`](scripts/12-fetch-prices.mjs) |
+|  | Publish sync | [`scripts/12-sync.mjs`](scripts/12-sync.mjs) |
+|  | Blog knowledge sync | [`scripts/p3-blog-knowledge.mjs`](scripts/p3-blog-knowledge.mjs) |
+|  | Founder digest | [`scripts/p2-digest.mjs`](scripts/p2-digest.mjs) |
+| Weekly cron jobs | Basket report | [`scripts/12-basket.mjs`](scripts/12-basket.mjs) |
+|  | Market scout brief | [`scripts/p2-scout-brief.mjs`](scripts/p2-scout-brief.mjs) |
+|  | Monday rollup and decision queue | [`scripts/founder-queue.mjs`](scripts/founder-queue.mjs) |
+| Skills | Write scopes for the 13 roles | [`scripts/p2-skill-scope.mjs`](scripts/p2-skill-scope.mjs) |
+|  | Product classification | [`scripts/4-classify.mjs`](scripts/4-classify.mjs) |
+|  | Scoring rules | [`scripts/score.mjs`](scripts/score.mjs) |
+|  | Packaging claim checks | [`scripts/7a-claim-rules.mjs`](scripts/7a-claim-rules.mjs) |
+| Founder dashboard · QwenWork Pages | Page renderer shown in the demo | [`hosted-cockpit-page/render.mjs`](hosted-cockpit-page/render.mjs) |
+|  | Web server | [`hosted-cockpit-page/server.mjs`](hosted-cockpit-page/server.mjs) |
+|  | Snapshot sanitizer | [`scripts/hosted-cockpit/sanitize.mjs`](scripts/hosted-cockpit/sanitize.mjs) |
+| Shopper site · Hashmeta AI | Homepage | [`runs/p3-06/homepage-block.html`](runs/p3-06/homepage-block.html) |
+|  | Product comparison | [`app/index.html`](app/index.html) |
+|  | Methodology page | [`runs/p4-04/methodology-new.html`](runs/p4-04/methodology-new.html) |
+|  | Product listing template | [`templates/collection-list.html`](templates/collection-list.html) |
+|  | Product detail template | [`templates/collection-detail.html`](templates/collection-detail.html) |
+
+[Open the founder dashboard](https://ne8hlevd.qwenwork.page/) · [Open the shopper site](https://healthhawk.geo.hashmeta.tech/)
+
+**Operator checkout only.** These paths start at the root of the full HealthHawk operator repository and are outside the public GitHub snapshot.
+
+| What to open | Path in the operator repository |
 | --- | --- |
-| **Cron jobs · QwenWork Scheduled** | The daily jobs use the [FairPrice fetcher](scripts/12-fetch-prices.mjs), [publish sync](scripts/12-sync.mjs), [blog knowledge builder](scripts/p3-blog-knowledge.mjs), and [founder digest builder](scripts/p2-digest.mjs). For weekly outputs, see the [basket calculation](scripts/12-basket.mjs), [market scout brief](scripts/p2-scout-brief.mjs), and [weekly rollup in `deriveWeekly`](scripts/founder-queue.mjs). The eight schedule registrations, Open Food Facts re-enrichment runner, and weekly blog-drafting instructions live in the operator setup. |
-| **13 custom HealthHawk skills** | Start with [`ROLE_SCOPES`](scripts/p2-skill-scope.mjs) for all 13 roles and their allowed write paths. Follow the [classifier](scripts/4-classify.mjs), [scoring rules](scripts/score.mjs), and [claim checks](scripts/7a-claim-rules.mjs) for examples of the work they perform. In the operator repository, `skills-manifest.json` indexes the versioned instructions at `skills/healthhawk-<role>/SKILL.md`. Those instruction files are outside this public snapshot. |
-| **Founder dashboard · QwenWork Pages** | The [dashboard renderer](hosted-cockpit-page/render.mjs) builds the page shown in the demo. The [server](hosted-cockpit-page/server.mjs) serves it, and the [snapshot sanitizer](scripts/hosted-cockpit/sanitize.mjs) selects which operating data can appear there. [Open the hosted founder dashboard](https://ne8hlevd.qwenwork.page/). |
-| **Shopper website · Hashmeta AI** | Start with the [homepage HTML](runs/p3-06/homepage-block.html). The [compare app](app/index.html) shows rankings and ingredient evidence. The [methodology HTML](runs/p4-04/methodology-new.html) explains grading, and the [collection templates](templates/) define the product list and detail pages. [Open the shopper website](https://healthhawk.geo.hashmeta.tech/). |
+| Index of all 13 skills and their instruction-file paths | `skills-manifest.json` |
+| Example skill instructions | `skills/healthhawk-orchestrator/SKILL.md` |
+| Saved QwenWork schedule readback | `runs/merge-fos/live-crons-post-repoint-20261123.json` |
+| Weekly Open Food Facts re-enrichment | `scripts/p2-reenrich.mjs` |
+| Blog drafting instructions | `skills/healthhawk-content/SKILL.md` |
 
 ## What shoppers can do
 
